@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_threads_clone/models/thread.dart';
 import 'package:flutter_threads_clone/utils/flutter_flow_theme.dart';
+import 'package:flutter_threads_clone/widgets/threadFooterWidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ThreadWidget extends StatefulWidget {
-  String text;
+  ThreadModel threadModel;
   double height = 170;
-  bool verified;
-  ThreadWidget(
-      {Key? key, required this.text, this.height = 0, this.verified = false})
+
+  ThreadWidget({Key? key, required this.threadModel, this.height = 0})
       : super(key: key);
 
   @override
@@ -27,7 +28,6 @@ class _ThreadWidgetState extends State<ThreadWidget> {
 
   void calculateWidgetHeight() {
     setState(() {
-      // Replace 'YourWidget()' with the specific widget for which you want to calculate the height
       widgetHeight = context.size!.height;
     });
   }
@@ -55,6 +55,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Thread implementation
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -62,9 +63,15 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                     Container(
                       width: 30,
                       height: 30,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF414141),
-                        borderRadius: BorderRadius.circular(80),
+                      clipBehavior: Clip.antiAlias,
+                      decoration: const BoxDecoration(
+                        // color: const Color(0xFF414141),
+                        shape: BoxShape.circle,
+                        // borderRadius: BorderRadius.circular(80),
+                      ),
+                      child: Image.network(
+                        widget.threadModel.picture ?? "",
+                        fit: BoxFit.cover,
                       ),
                     ),
                     Padding(
@@ -81,8 +88,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                     ),
                   ],
                 ),
-                Expanded(
-                  flex: 8,
+                Flexible(
                   child: Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
                     child: Column(
@@ -103,7 +109,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                     alignment:
                                         const AlignmentDirectional(-1, 0),
                                     child: Text(
-                                      'fdnews',
+                                      widget.threadModel.username,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -115,20 +121,16 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                           ),
                                     ),
                                   ),
-                                  if (widget.verified)
+                                  if (widget.threadModel.verified ?? false)
                                     Padding(
                                       padding:
                                           const EdgeInsetsDirectional.fromSTEB(
-                                              5, 0, 0, 0),
-                                      child: Container(
+                                              5, 2, 0, 0),
+                                      child: Image.asset(
+                                        'assets/images/verified.png',
                                         width: 10,
                                         height: 10,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                 ],
@@ -159,7 +161,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                           ),
                         ),
                         Text(
-                          widget.text,
+                          widget.threadModel.content,
                           textAlign: TextAlign.start,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
@@ -216,72 +218,9 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                 ),
               ],
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                SizedBox(
-                  width: 34,
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: const AlignmentDirectional(1, 0),
-                        child: Container(
-                          width: 18,
-                          height: 18,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFDCDCDC),
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(-1, 0),
-                        child: Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                          child: Container(
-                            width: 15,
-                            height: 15,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF6C6C6C),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(0, 1),
-                        child: Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(8, 20, 0, 0),
-                          child: Container(
-                            width: 12,
-                            height: 12,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF383838),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(-1, 0),
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                    child: Text(
-                      '5 replies • 381 likes',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 12,
-                          ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            ThreadFooterWidget(
+                repliesCount: widget.threadModel.repliesCount,
+                likesCount: widget.threadModel.likesCount),
           ],
         ),
       ),
