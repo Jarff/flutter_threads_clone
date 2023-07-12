@@ -42,36 +42,49 @@ class _TabsPageState extends State<TabsPage> {
           type: BottomNavigationBarType.fixed,
           selectedFontSize: 20,
           selectedIconTheme: const IconThemeData(color: Colors.black),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.background,
           currentIndex: widget.currentTab,
           onTap: (int i) {
             selectTab(i);
           },
           items: [
             BottomNavigationBarItem(
-                label: "",
-                icon: Icon(
-                    widget.currentTab == 0 ? Icons.home : Icons.home_outlined)),
+              label: "",
+              icon: Icon(
+                widget.currentTab == 0 ? Icons.home : Icons.home_outlined,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
             BottomNavigationBarItem(
-                label: "",
-                icon: Icon(widget.currentTab == 1
-                    ? Icons.search
-                    : Icons.search_outlined)),
+              label: "",
+              icon: Icon(
+                widget.currentTab == 1 ? Icons.search : Icons.search_outlined,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
             BottomNavigationBarItem(
-                label: "",
-                icon: Icon(widget.currentTab == 2
+              label: "",
+              icon: Icon(
+                widget.currentTab == 2
                     ? Icons.post_add
-                    : Icons.post_add_outlined)),
+                    : Icons.post_add_outlined,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
             BottomNavigationBarItem(
-                label: "",
-                icon: Icon(widget.currentTab == 3
-                    ? Icons.favorite
-                    : Icons.favorite_border)),
+              label: "",
+              icon: Icon(
+                widget.currentTab == 3 ? Icons.favorite : Icons.favorite_border,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
             BottomNavigationBarItem(
-                label: "",
-                icon: Icon(widget.currentTab == 4
-                    ? Icons.person
-                    : Icons.person_outline)),
+              label: "",
+              icon: Icon(
+                widget.currentTab == 4 ? Icons.person : Icons.person_outline,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
           ],
         ),
       ),

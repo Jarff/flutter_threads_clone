@@ -36,9 +36,9 @@ class _ThreadWidgetState extends State<ThreadWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        border: Border(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
+        border: const Border(
           bottom: BorderSide(
             color: Color(0x73888888),
             width: 0.5,
@@ -116,8 +116,8 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                             fontFamily: 'Readex Pro',
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500,
-                                            color: const Color.fromRGBO(
-                                                34, 34, 34, 1),
+                                            color:
+                                                Theme.of(context).primaryColor,
                                           ),
                                     ),
                                   ),
@@ -168,7 +168,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                     fontFamily: 'Readex Pro',
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
-                                    color: const Color.fromRGBO(34, 34, 34, 1),
+                                    color: Theme.of(context).primaryColor,
                                   ),
                         ),
                         Padding(

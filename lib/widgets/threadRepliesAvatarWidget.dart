@@ -59,7 +59,9 @@ class _ThreadRepliesAvatarWidgetState extends State<ThreadRepliesAvatarWidget> {
                   width: 25,
                   height: 25,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 3.3),
+                    border: Border.all(
+                        color: Theme.of(context).colorScheme.background,
+                        width: 3.3),
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Container(

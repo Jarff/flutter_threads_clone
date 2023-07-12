@@ -4,4 +4,7 @@ A Flutter project to mirror Threads UI.
 
 ¡Feel free to fork this project! 🚀
 
-![Preview](/assets/images/simulator.png)
+Light Mode and Dark Mode supported.
+
+![Preview Light Mode](/assets/images/simulator.png)
+![Preview Dark Mode](/assets/images/simulator.png)
